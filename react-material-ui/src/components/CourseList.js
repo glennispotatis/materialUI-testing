@@ -13,6 +13,22 @@ class CoursesList extends Component {
         }
     }
 
+    onSearchInputChange = (event) => {
+        if(event.target.value) {
+            let results = [];
+            let searchField = "Title";
+            let searchVal = event.target.value;
+            for(let i = 0; i < test.length; i++){
+                if(test[i][searchField] === searchVal){
+                    results.push(test[i]);
+                }
+            }
+            this.setState({courses: results});
+        } else {
+            this.setState({courses: test});
+        }
+    }
+
     render(){
         return (
             <div>
@@ -24,9 +40,9 @@ class CoursesList extends Component {
                             margin="normal"
                             onChange={this.onSearchInputChange}
                         />
-                        <Grid container spacing={2} style={{padding: 24}}>
+                        <Grid container spacing={6} style={{padding: 24}}>
                             {this.state.courses.map(currentCourse => (
-                                <Grid item xs={12} sm={6} lg={4} xl={3}>
+                                <Grid item xs={6} sm={3}>
                                     <Course course={currentCourse} />
                                 </Grid>
                             ))}
